@@ -45,7 +45,7 @@ struct AddNewTask: View {
                                 if taskModel.taskColor == color {
                                     Circle()
                                         .strokeBorder(Color(color))
-                                        .padding(-3) 
+                                        .padding(3)
                                 }
                             }
                             .contentShape(Circle())
@@ -62,6 +62,7 @@ struct AddNewTask: View {
             Divider()
                 .padding(.vertical, 10)
             
+            // date
             VStack(alignment: .leading, spacing: 12) {
                 Text("Dead Line")
                     .font(.caption)
@@ -75,7 +76,7 @@ struct AddNewTask: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay(alignment: .bottomTrailing) {
                 Button {
-                    
+                    taskModel.showDatePicker = true
                 } label: {
                     Image(systemName: "calendar")
                         .foregroundColor(.black)
@@ -84,6 +85,7 @@ struct AddNewTask: View {
             
             Divider()
             
+            // title
             VStack(alignment: .leading, spacing: 12) {
                 Text("Task Title")
                     .font(.caption)
@@ -130,7 +132,11 @@ struct AddNewTask: View {
             
             // save button
             Button {
-                
+                if taskModel.addTask(context: env.managedObjectContext) {
+                    env.dismiss()
+                } else {
+                    taskModel.taskTitle = "123123122"
+                }
             } label: {
                 Text("Save Task")
                     .font(.callout)
@@ -144,10 +150,30 @@ struct AddNewTask: View {
                     }
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
-
+            .disabled(taskModel.taskTitle == "")
+            .opacity(taskModel.taskTitle == "" ? 0.6 : 1)
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .padding()
+        .overlay {
+            ZStack {
+                if taskModel.showDatePicker {
+                    Rectangle()
+                        .fill(.thinMaterial)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            taskModel.showDatePicker = false
+                        }
+                    DatePicker.init("", selection: $taskModel.taskDeadline, in: Date.now...Date.distantFuture)
+                        .datePickerStyle(.graphical)
+                        .labelsHidden()
+                        .padding()
+                        .background(.white, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .padding()
+                }
+            }
+            .animation(.easeInOut, value: taskModel.showDatePicker)
+        }
     }
 }
 
