@@ -45,7 +45,7 @@ struct AddNewTask: View {
                                 if taskModel.taskColor == color {
                                     Circle()
                                         .strokeBorder(Color(color))
-                                        .padding(3)
+                                        .padding(-3)
                                 }
                             }
                             .contentShape(Circle())
