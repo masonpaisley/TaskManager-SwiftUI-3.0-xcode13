@@ -24,6 +24,7 @@
 		4A69BD7128BF0380006F4E46 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69BD7028BF0380006F4E46 /* Home.swift */; };
 		4A69BD7328BF0722006F4E46 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69BD7228BF0722006F4E46 /* TaskViewModel.swift */; };
 		4A69BD7528BF0CA4006F4E46 /* AddNewTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69BD7428BF0CA4006F4E46 /* AddNewTask.swift */; };
+		4A9B946828BFB04600C223EE /* DynamicFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B946728BFB04600C223EE /* DynamicFilteredView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		4A69BD7028BF0380006F4E46 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		4A69BD7228BF0722006F4E46 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		4A69BD7428BF0CA4006F4E46 /* AddNewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTask.swift; sourceTree = "<group>"; };
+		4A9B946728BFB04600C223EE /* DynamicFilteredView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicFilteredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		4A69BD6D28BF0359006F4E46 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A9B946728BFB04600C223EE /* DynamicFilteredView.swift */,
 				4A69BD7028BF0380006F4E46 /* Home.swift */,
 				4A69BD7428BF0CA4006F4E46 /* AddNewTask.swift */,
 			);
@@ -335,6 +338,7 @@
 				4A69BD5728BF0197006F4E46 /* TaskManagerApp.swift in Sources */,
 				4A69BD7328BF0722006F4E46 /* TaskViewModel.swift in Sources */,
 				4A69BD5B28BF0197006F4E46 /* Persistence.swift in Sources */,
+				4A9B946828BFB04600C223EE /* DynamicFilteredView.swift in Sources */,
 				4A69BD7128BF0380006F4E46 /* Home.swift in Sources */,
 				4A69BD7528BF0CA4006F4E46 /* AddNewTask.swift in Sources */,
 				4A69BD5528BF0197006F4E46 /* TaskManager.xcdatamodeld in Sources */,

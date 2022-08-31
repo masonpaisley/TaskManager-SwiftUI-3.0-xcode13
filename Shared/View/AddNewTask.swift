@@ -14,7 +14,7 @@ struct AddNewTask: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            Text("Add Task")
+            Text(taskModel.editTask == nil ? "Add Task" : "Edit Task")
                 .font(.title3.bold())
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .leading) {
@@ -25,7 +25,20 @@ struct AddNewTask: View {
                             .font(.title3)
                             .foregroundColor(.black)
                     }
-
+                }
+                .overlay(alignment: .trailing) {
+                    Button {
+                        if let editTask = taskModel.editTask {
+                            env.managedObjectContext.delete(editTask)
+                            try? env.managedObjectContext.save()
+                            env.dismiss()
+                        }
+                    } label: {
+                        Image(systemName: "trash")
+                            .font(.title3)
+                            .foregroundColor(.red)
+                    }
+                    .opacity(taskModel.editTask == nil ? 0 : 1)
                 }
             
             VStack(alignment: .leading, spacing: 12) {

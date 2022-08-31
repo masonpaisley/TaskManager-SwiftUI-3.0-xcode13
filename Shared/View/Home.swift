@@ -15,6 +15,8 @@ struct Home: View {
     @FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Task.deadline, ascending: false)], predicate: nil, animation: .easeInOut)
     var tasks: FetchedResults<Task>
     
+    // Environment values
+    @Environment(\.self) var env
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
@@ -54,12 +56,19 @@ struct Home: View {
             // linear gradient bg
             .padding(.top, 10)
             .frame(maxWidth: .infinity)
-//            .background {
-//
-//            }
+            .background {
+                LinearGradient(colors: [
+                    .white.opacity(0.05),
+                    .white.opacity(0.4),
+                    .white.opacity(0.7),
+                    .white
+                ], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            }
         }
         .fullScreenCover(isPresented: $taskModel.openEditTask) {
             taskModel.resetTaskData()
+            taskModel.editTask = nil
         } content: {
             AddNewTask()
                 .environmentObject(taskModel)
@@ -71,32 +80,86 @@ struct Home: View {
     @ViewBuilder
     func TaskView() -> some View {
         LazyVStack(spacing: 20) {
-            ForEach(tasks) { task in
+            // filter request view
+            DynamicFilteredView(currentTab: taskModel.currentTab) { (task: Task) in
                 TaskRowView(task: task)
             }
+//            ForEach(tasks) { task in
+//                TaskRowView(task: task)
+//            }
         }
         .padding(.top, 20)
     }
     
     // TaskRowView
+    @ViewBuilder
     func TaskRowView(task: Task) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(task.type ?? "")
-                .font(.callout)
-                .padding(.vertical, 5)
-                .padding(.horizontal)
-                .background {
-                    Capsule()
-                        .fill(.gray.opacity(0.3))
+            HStack {
+                // 类型
+                Text(task.type ?? "")
+                    .font(.callout)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
+                    .background {
+                        Capsule()
+                            .fill(.gray.opacity(0.3))
+                    }
+                Spacer()
+                
+                // 编辑按钮 edit Button only for non completed tasks
+                if !task.isCompleted || taskModel.currentTab != "Failed" {
+                    Button {
+                        taskModel.editTask = task
+                        taskModel.openEditTask = true
+                        taskModel.setupTask()
+                    } label: {
+                        Image(systemName:  "square.and.pencil")
+                            .foregroundColor(.black)
+                    }
                 }
-            Spacer()
+            }
             
-            if !task.isCompleted {
-                Button {
+            //标题
+            Text(task.title ?? "")
+                .font(.title2.bold())
+                .foregroundColor(.black)
+                .padding(.vertical, 10)
+            
+            
+            HStack(alignment: .bottom) {
+                // 时间点
+                VStack(alignment: .leading, spacing: 10) {
+                    Label {
+                        Text((task.deadline ?? Date()).formatted(date: .long, time: .omitted))
+                    } icon: {
+                        Image(systemName: "calendar")
+                    }
+                    .font(.caption)
                     
-                } label: {
-                    Image(systemName:  "square.and.pencil")
-                        .foregroundColor(.black)
+                    Label {
+                        Text((task.deadline ?? Date()).formatted(date: .omitted, time: .shortened))
+                    } icon: {
+                        Image(systemName: "clock")
+                    }
+                    .font(.caption)
+
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                // 完成圆圈
+                if !task.isCompleted || taskModel.currentTab != "Failed" {
+                    Button {
+                        // update
+                        task.isCompleted.toggle()
+                        try? env.managedObjectContext.save()
+                    } label: {
+                        Circle()
+                            .strokeBorder(.black, lineWidth: 1.5)
+                            .frame(width: 25, height: 25)
+                            .contentShape(Circle())
+                    }
+
                 }
             }
         }
@@ -111,7 +174,7 @@ struct Home: View {
     // Custom Segmented Bar
     @ViewBuilder
     func CustomSegmentedBar() -> some View {
-        let tabs = ["Today", "Upcoming", "Task Done"]
+        let tabs = ["Today", "Upcoming", "Task Done", "Failed"]
         HStack(spacing: 10) {
             ForEach(tabs, id: \.self) { tab in
                 Text(tab)
@@ -133,13 +196,13 @@ struct Home: View {
                         withAnimation { taskModel.currentTab = tab }
                     }
             }
-           
+            
         }
     }
 }
 
-struct Home_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct Home_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
