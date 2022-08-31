@@ -21,6 +21,9 @@
 		4A69BD5C28BF0197006F4E46 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69BD2E28BF0195006F4E46 /* Persistence.swift */; };
 		4A69BD5D28BF0197006F4E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A69BD2F28BF0197006F4E46 /* Assets.xcassets */; };
 		4A69BD5E28BF0197006F4E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A69BD2F28BF0197006F4E46 /* Assets.xcassets */; };
+		4A69BD7128BF0380006F4E46 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69BD7028BF0380006F4E46 /* Home.swift */; };
+		4A69BD7328BF0722006F4E46 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69BD7228BF0722006F4E46 /* TaskViewModel.swift */; };
+		4A69BD7528BF0CA4006F4E46 /* AddNewTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69BD7428BF0CA4006F4E46 /* AddNewTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		4A69BD4D28BF0197006F4E46 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A69BD5128BF0197006F4E46 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		4A69BD5328BF0197006F4E46 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		4A69BD7028BF0380006F4E46 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		4A69BD7228BF0722006F4E46 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		4A69BD7428BF0CA4006F4E46 /* AddNewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,8 @@
 		4A69BD2928BF0195006F4E46 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4A69BD6E28BF0366006F4E46 /* ViewModel */,
+				4A69BD6D28BF0359006F4E46 /* View */,
 				4A69BD2C28BF0195006F4E46 /* TaskManagerApp.swift */,
 				4A69BD2D28BF0195006F4E46 /* ContentView.swift */,
 				4A69BD2E28BF0195006F4E46 /* Persistence.swift */,
@@ -147,6 +155,23 @@
 				4A69BD5328BF0197006F4E46 /* Tests_macOSLaunchTests.swift */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		4A69BD6D28BF0359006F4E46 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A69BD7028BF0380006F4E46 /* Home.swift */,
+				4A69BD7428BF0CA4006F4E46 /* AddNewTask.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A69BD6E28BF0366006F4E46 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A69BD7228BF0722006F4E46 /* TaskViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,7 +333,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A69BD5728BF0197006F4E46 /* TaskManagerApp.swift in Sources */,
+				4A69BD7328BF0722006F4E46 /* TaskViewModel.swift in Sources */,
 				4A69BD5B28BF0197006F4E46 /* Persistence.swift in Sources */,
+				4A69BD7128BF0380006F4E46 /* Home.swift in Sources */,
+				4A69BD7528BF0CA4006F4E46 /* AddNewTask.swift in Sources */,
 				4A69BD5528BF0197006F4E46 /* TaskManager.xcdatamodeld in Sources */,
 				4A69BD5928BF0197006F4E46 /* ContentView.swift in Sources */,
 			);
